@@ -10,12 +10,7 @@ import { TodoData } from "../../types/todo";
 
 export function Home() {
   const [newTaskContent, setNewTaskContent] = useState<string>("");
-  const [todos, setTodos] = useState<TodoData[]>([
-    {
-      complete: false,
-      text: "Integer urna interdum massa libero auctor neque turpis turpis semper.",
-    },
-  ]);
+  const [todos, setTodos] = useState<TodoData[]>([]);
   // functions
   function addTodo(newTodo: string) {
     if (todos.filter((v) => v.text === newTodo).length > 0) {

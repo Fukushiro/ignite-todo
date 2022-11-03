@@ -1,15 +1,15 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, ViewProps } from "react-native";
 import { Trash } from "../../assets/Trash";
 import { TodoData } from "../../types/todo";
 import { Checkbox } from "./Checkbox";
 import { styles } from "./styles";
-interface TaskCardProps {
+interface TaskCardProps extends ViewProps {
   Todo: TodoData;
   setTodos: (
     newTodo: TodoData[] | ((prevVar: TodoData[]) => TodoData[])
   ) => void;
 }
-export function TaskCard({ Todo, setTodos }: TaskCardProps) {
+export function TaskCard({ Todo, setTodos, ...rest }: TaskCardProps) {
   // handles
   function handleChangeCheck() {
     console.log(Todo.text);
@@ -31,7 +31,7 @@ export function TaskCard({ Todo, setTodos }: TaskCardProps) {
   //
 
   return (
-    <View style={styles.container}>
+    <View {...rest} style={[styles.container, rest.style]}>
       <Checkbox checked={Todo.complete} onClick={handleChangeCheck} />
       <Text style={Todo.complete ? styles.textComplete : styles.text}>
         {Todo.text}

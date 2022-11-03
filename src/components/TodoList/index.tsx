@@ -1,4 +1,5 @@
 import { ScrollView, Text, View, ViewProps } from "react-native";
+import { Clipboard } from "../../assets/Clipboard";
 import { TodoData } from "../../types/todo";
 import { TaskCard } from "../TaskCard";
 import { InfoLabel } from "./InfoLabel";
@@ -20,9 +21,25 @@ export function TodoList({ todos, setTodos, ...rest }: TodoListProps) {
           variant="purple"
         />
       </View>
-      <ScrollView>
+      {todos.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Clipboard />
+          <Text style={styles.emptyContainerText1}>
+            Você ainda não tem tarefas cadastradas
+          </Text>
+          <Text style={styles.emptyContainerText2}>
+            Crie tarefas e organize seus itens a fazer
+          </Text>
+        </View>
+      ) : null}
+      <ScrollView style={styles.list}>
         {todos.map((val) => (
-          <TaskCard key={val.text} Todo={val} setTodos={setTodos} />
+          <TaskCard
+            key={val.text}
+            style={{ marginBottom: 8 }}
+            Todo={val}
+            setTodos={setTodos}
+          />
         ))}
       </ScrollView>
     </View>
